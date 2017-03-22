@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginDao {
-    public static boolean validate(String name, String pass) {        
-        boolean status = false;
+    public static int validate(String name, String pass) {        
+        int id = 0;
         Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -29,7 +29,9 @@ public class LoginDao {
             pst.setString(2, pass);
 
             rs = pst.executeQuery();
-            status = rs.next();
+            if(rs.next()){
+            	id = rs.getInt(1);
+            }
 
         } catch (Exception e) {
             System.out.println(e);
@@ -56,6 +58,6 @@ public class LoginDao {
                 }
             }
         }
-        return status;
+        return id;
     }
 }

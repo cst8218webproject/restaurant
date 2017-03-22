@@ -24,7 +24,7 @@ a:hover {
  * Base structure
  */
 body {
-  padding-top: 70px;
+  padding-top: 50px;
   padding-bottom: 30px;
 }
 
@@ -47,7 +47,7 @@ body {
   height: 100%;
   background-color: #333;
 }
-body {
+.lead {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);

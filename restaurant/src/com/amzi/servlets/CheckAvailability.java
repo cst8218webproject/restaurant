@@ -20,11 +20,9 @@ public class CheckAvailability extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-
             String connectionURL = "jdbc:mysql://localhost:3306/webproject?useSSL=false"; // students is my database name
             Connection connection = null;
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -35,10 +33,10 @@ public class CheckAvailability extends HttpServlet {
             ResultSet rs = ps.executeQuery();
             // TODO does output to reg.jsp
             if (!rs.next()) {
-                out.println(""+uname+" is avaliable");
+                out.println("<font color=green>"+uname+" is avaliable</font>");
             }
             else{
-            	out.println(""+uname+" is already in use");
+            	out.println("<font color=red>"+uname+" is already in use</font>");
             }
             //out.println();
 
@@ -54,7 +52,7 @@ public class CheckAvailability extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

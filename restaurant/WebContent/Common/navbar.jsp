@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ResourceBundle"%>
+<%@page import="com.cart.ejb.CartBean"%>
 
 <c:set var="loc" value="en_CA" />
 <c:if test="${!(empty param.locale)}">
@@ -10,41 +11,54 @@
 </c:if>
 <fmt:setLocale value="${loc}" />
 <fmt:bundle basename="Language/LanguageBundle">
+	<%
+		String username;
+			if (null == session) {
+				response.sendRedirect("index.jsp");
+			} else if (null == session.getAttribute("username")) {
+				response.sendRedirect("index.jsp");
+			} else {
+				CartBean cart = (CartBean) session.getAttribute("Cart");
+	%>
 
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-<div class="container">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed"
-			data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-			aria-controls="navbar">
-			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
-			<span class="icon-bar"></span> <span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="/index.jsp">ACZ restaurant</a>
-	</div>
-	<div id="navbar" class="navbar-collapse collapse">
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="#"><fmt:message key="nav.Menu" /></a></li>
-			<li><a href="#about">About</a></li>
-			<li><a href="#contact">Contact</a></li>
-			
-			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown" role="button" aria-haspopup="true"
-				aria-expanded="false">Dropdown <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else here</a></li>
-					<li role="separator" class="divider"></li>
-					<li class="dropdown-header">Nav header</li>
-					<li><a href="#">Separated link</a></li>
-					<li><a href="#">One more separated link</a></li>
-				</ul></li>
-		</ul>
-	</div>
-	<!--/.nav-collapse -->
-</div>
-</nav>
-
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Hello <%=session.getAttribute("username")%>,
+					welcome to ACZ Restaurant
+				</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="welcome.jsp">Home</a></li>
+					<li><a href="#menu">Menu</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="success.jsp">Partner</a>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Profile <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Edit profile</a></li>
+							<li><a href="#">Orders</a></li>
+							<li><hr></li>
+							<li><a href="logout.jsp">Logout</a></li>
+						</ul></li>
+					<li role="presentation"><a href="Cart.jsp">Cart <span
+							class="badge"><%=cart.Count() %></span></a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+	<%} %>
 </fmt:bundle>

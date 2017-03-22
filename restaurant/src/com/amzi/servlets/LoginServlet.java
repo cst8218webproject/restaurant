@@ -14,31 +14,33 @@ import com.amzi.dao.LoginDao;
 
 public class LoginServlet extends HttpServlet{
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response)  
-            throws ServletException, IOException {  
+	public void doPost(HttpServletRequest request, HttpServletResponse response)  
+			throws ServletException, IOException {  
 
-        response.setContentType("text/html");  
-        PrintWriter out = response.getWriter();  
-        
-        String n=request.getParameter("uname");  
-        String p=request.getParameter("pass"); 
-        
-        HttpSession session = request.getSession(false);
-        if(session!=null)
-        session.setAttribute("username", n);
+		response.setContentType("text/html");  
+		PrintWriter out = response.getWriter();  
 
-        if(LoginDao.validate(n, p)){  
-            RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");  
-            rd.forward(request,response);  
-        }  
-        else{
-            request.setAttribute("errorMessage", "Please input correct account and password");
-            RequestDispatcher rd=request.getRequestDispatcher("signin.jsp");  
-            rd.include(request,response);  
-        }  
+		String n=request.getParameter("uname");  
+		String p=request.getParameter("pass"); 
 
-        out.close();
-    }  
+		HttpSession session = request.getSession(false);
+		if(session!=null){
+			session.setAttribute("username", n);
+		}
+		int id = LoginDao.validate(n, p);
+		if(id > 0){
+			session.setAttribute("id", id);
+			RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");  
+			rd.forward(request,response);  
+		}  
+		else{
+			request.setAttribute("errorMessage", "Please input correct account and password");
+			RequestDispatcher rd=request.getRequestDispatcher("signin.jsp");  
+			rd.include(request,response);  
+		}  
+
+		out.close();
+	}  
 } 
