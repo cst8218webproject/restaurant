@@ -117,43 +117,6 @@
 			<jsp:include page="Common/menu.jsp" />
 			
 		</div>
-
-		<div class="row">
-			<div class="col-md-4 text-center">
-				<div class="thumbnail">
-					<a href="wwwroot/beef.png" data-lightbox-gallery="zenda-gallery">
-						<img class="img-responsive" src="wwwroot/beef.png" alt="">
-					</a>
-					<div class="caption">
-						<h3>Herb Seasoned Beefsteak</h3>
-						<p>Beef / Garlic / Green</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Iste saepe et quisquam nesciunt maxime.</p>
-						<ul class="list-inline">
-							<li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-							</li>
-							<li><a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
-							</li>
-							<li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-							</li>
-						</ul>
-						<div id="page-wrap">
-							<form method="post" action="addToCart">
-								<!-- TODO Add action to put it to cart -->
-								<div class="numbers-row">
-									<label for="name">Quantity</label> <input type="text"
-										name="french-hens" id="1" value="0">
-								</div>
-								<div class="buttons">
-									<input type="submit" value="Add" id="order">
-								</div>
-							</form>
-							<button id="order">Add to cart</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
 			<!-- /.row -->
 			<section id="menu" class="parallax-section">
 				<div class="container">
