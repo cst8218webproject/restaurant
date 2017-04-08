@@ -1,15 +1,33 @@
+<%@ page import ="java.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="project.web.common.MenuitemBean"%> //
+<%@ page import="java.math.BigDecimal" %>
 <%@ page import="com.cart.ejb.CartBean"%>
 <%@ page import="project.web.common.UserBean"%>
 <%@ page import="project.web.dao.UserFactory"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%
+	ResultSet rs = null;
+	String userName = (String)session.getAttribute("username");
+    
+    Class.forName("com.mysql.jdbc.Driver").newInstance();
+    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webproject?useSSL=false",
+            "root", "root");
+    Statement statement = connection.createStatement();
+
+    try{
+    	String QueryString = "select * from orders JOIN order_menuitem ON orders.id=order_menuitem.order_id JOIN menuitems ON order_menuitem.menuitem_id=menuitems.id  where firstname = '"+userName+"' ORDER BY orders.id ASC ";
+    	rs = statement.executeQuery(QueryString);
+%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
+<link href="Common/css/NewFile.css" rel="stylesheet">
 <!-- Custom CSS -->
 <script src='Common/css/profile.css'></script>
 
@@ -20,7 +38,7 @@
 <br>
 <br>
 </body>
-<title>Edit Profile</title>
+<title>Order History</title>
 </head>
 <body>
 	<%
@@ -62,7 +80,7 @@
 					data-toggle="dropdown">Profile <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="userprofile.jsp">Edit profile</a></li>
-						<li><a href="orderHistory.jsp">Orders</a></li>
+						<li><a href="#">Orders</a></li>
 						<li><hr></li>
 						<li><a href="logout.jsp">Logout</a></li>
 					</ul></li>
@@ -75,103 +93,51 @@
 	<!-- /.container --> </nav>
 	<div class="container">
 		<div class="row">
-			<h1>Edit Profile</h1>
+			<h1>Order History</h1>
 			<hr>
 			<!-- left column -->
 			<div class="col-md-3">
 				<div class="text-center">
 					<p>
-						<a href="#" class="btn btn-primary btn-block "> Edit profile</a>
+						<a href="userprofile.jsp" class="btn btn-primary btn-block "> Edit profile</a>
 					</p>
 					<p>
-						<a href="orderHistory.jsp" class="btn btn-primary btn-block ">Order History</a>
+						<a href="#" class="btn btn-primary btn-block ">Order History</a>
 					</p>
 				</div>
 			</div>
-
-			<!-- edit form column -->
 			<div class="col-md-9 personal-info">
-				<%
-					UserBean user = null;
-						int id = 0;
-						try {
-							id = (int) session.getAttribute("id");
-							user = UserFactory.getInstance().findById(id);
-						} catch (Exception e) {
-				%>
-				<p><%=e.getMessage()%></p>
-				<%
-					}
-						if (user != null) {
-				%>
 				<div class="alert alert-info alert-dismissable">
-					<a class="panel-close close" data-dismiss="alert">×</a> <i
-						class="fa fa-coffee"></i> <strong>.</strong>.You can edit your
-					profile....
+						<a class="panel-close close" data-dismiss="alert">×</a> <i
+							class="fa fa-coffee"></i> <strong>.</strong>.You can view your
+						order history....
 				</div>
-				<h3>Personal info</h3>
-				<form class="form-horizontal" role="form" method="POST"
-					action="updateUserInfo">
-					<div class="form-group">
-						<label class="col-lg-3 control-label">First name:</label>
-						<div class="col-lg-8">
-							<input class="form-control" name="fname" type="text"
-								value="<%=user.getFirstname()%>">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Last name:</label>
-						<div class="col-lg-8">
-							<input class="form-control" name="lname" type="text"
-								value="<%=user.getLastname()%>">
-						</div>
-					</div>
-					<!-- 
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Home Address</label>
-						<div class="col-lg-8">
-							<input class="form-control" type="text" value="">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Company Address</label>
-						<div class="col-lg-8">
-							<input class="form-control" type="text" value="">
-						</div>
-					</div>
-					 -->
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Email:</label>
-						<div class="col-lg-8">
-							<input class="form-control" name="email" type="text"
-								value="<%=user.getEmail()%>">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Password:</label>
-						<div class="col-md-8">
-							<input class="form-control" name="pwd" type="password" value="">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label"></label>
-						<div class="col-md-8">
-							<input class="btn btn-primary" type="submit" value="Save Changes">
-							<span></span> <input class="btn btn-default" type="reset"
-								value="Cancel">
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<hr>
+	
+			<div class="datagrid" style="Common/css/NewFile.css"><table>
+				<thead><tr><th>Order Number</th><th>Date/Time</th><th>Item</th><th>Item Price</th><th>Quantity</th><th>Total Price of Order</th></tr></thead>
+				<tfoot><tr><td colspan="6"><div id="paging"></div></tr></tfoot>
+				<tbody><%while (rs.next()){%>
+					<tr><td><%=rs.getInt(1)%></TD><td><%=rs.getString(8)%></TD><td><%=rs.getString(16)%></TD> <td>$<%=rs.getBigDecimal(17)%></TD> <td><%=rs.getInt(14)%></TD><td>$<%=rs.getBigDecimal(7)%></TD> </tr>
+				<%}%></tbody>
+			</table></div>
+	
 	<%
-		} else {
+    	
+	rs.close();
+	statement.close();
+	connection.close();
+	}} catch (Exception ex) {
 	%>
-	<p>Error loading user info, please try login again</p>
+	</font>
+	</div>
+	<font size="+3" color="red"></b>
 	<%
-		}
-		}
-	%></ body>
-</html>
+	out.println("Unable to connect to database.");
+	}
+	%>
+	
+	</font>
+	</body>
+	
+
+	</html>

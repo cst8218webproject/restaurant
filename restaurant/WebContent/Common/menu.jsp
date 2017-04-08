@@ -10,7 +10,7 @@
 	ResultSet ingredientRS = null;
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webproject?useSSL=false", "root", "");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webproject?useSSL=false", "root", "root");
 		pst = conn.prepareStatement("select * from menuitems");
 		menuRS = pst.executeQuery();
 

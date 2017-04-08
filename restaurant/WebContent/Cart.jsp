@@ -59,7 +59,7 @@
 					data-toggle="dropdown">Profile <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="userprofile.jsp">Edit profile</a></li>
-						<li><a href="#">Orders</a></li>
+						<li><a href="orderHistory.jsp">Orders</a></li>
 						<li><hr></li>
 						<li><a href="logout.jsp">Logout</a></li>
 					</ul></li>
@@ -74,74 +74,81 @@
 		<%
 			if (null != cart) {
 		%>
-		<table id="cart" class="table table-hover table-condensed">
-			<thead>
-				<tr>
-					<th style="width: 50%">Product</th>
-					<th style="width: 10%">Price</th>
-					<th style="width: 8%">Quantity</th>
-					<th style="width: 22%" class="text-center">Subtotal</th>
-					<th style="width: 10%"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					if (cart.Count() == 0) {
-				%>
-				<td>No items in the cart.</td>
-				<%
-					} else {
-								for (MenuitemBean i : cart.getContents()) {
-				%>
-				<tr>
-					<td data-th="Product">
-						<div class="row">
-							<div class="col-sm-2 hidden-xs">
-								<img src="<%=i.getImgsrc()%>" alt="..." class="img-responsive" />
+		<!-- <form method="post" action="addOrder.jsp" > -->
+			<table id="cart" class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th style="width: 50%">Product</th>
+						<th style="width: 10%">Price</th>
+						<th style="width: 8%">Quantity</th>
+						<th style="width: 22%" class="text-center">Subtotal</th>
+						<th style="width: 10%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						if (cart.Count() == 0) {
+					%>
+					<td>No items in the cart.</td>
+					<%
+						} else {
+									for (MenuitemBean i : cart.getContents()) {
+					%>
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-sm-2 hidden-xs">
+									<img src="<%=i.getImgsrc()%>" alt="..." class="img-responsive" />
+								</div>
+								<div class="col-sm-10">
+									<h4 class="nomargin"><%=i.getName()%></h4>
+									<p><%=i.getDescription()%></p>
+								</div>
 							</div>
-							<div class="col-sm-10">
-								<h4 class="nomargin"><%=i.getName()%></h4>
-								<p><%=i.getDescription()%></p>
-							</div>
-						</div>
-					</td>
-					<td data-th="Price">$<%=i.getPrice()%></td>
-					<td data-th="Quantity"><input type="number"
-						class="form-control text-center" value="<%=i.getQuantity()%>"></td>
-					<td data-th="Subtotal" class="text-center">$<%=i.getSubTotal()%></td>
-					<td class="actions" data-th="">
-
-						<button class="btn btn-danger btn-sm" id="remove"
-							value="<%=i.getId()%>">
-							<i class="fa fa-trash-o"></i>
-						</button>
-					</td>
-				</tr>
-				<%
-					} //end for
-							} //end else
-				%>
-			</tbody>
-			<tfoot>
-				<tr class="visible-xs">
-					<td class="text-center"><strong>Total</strong></td>
-				</tr>
-				<tr>
-					<td><a href="welcome.jsp" class="btn btn-warning"><i
-							class="fa fa-angle-left"></i> Continue Shopping</a></td>
-					<td colspan="2" class="hidden-xs"></td>
-					<td class="hidden-xs text-center"><strong>Total $<%=cart.totalPrice()%></strong></td>
-					<td><a href="#" class="btn btn-success btn-block">Checkout
-							<i class="fa fa-angle-right"></i>
-					</a></td>
-				</tr>
-			</tfoot>
-		</table>
+						</td>
+						<td data-th="Price">$<%=i.getPrice()%></td>
+						<td data-th="Quantity"><input type="number"
+							class="form-control text-center" value="<%=i.getQuantity()%>"></td>
+						<td data-th="Subtotal" class="text-center">$<%=i.getSubTotal()%></td>
+						<td class="actions" data-th="">
+	
+							<button class="btn btn-danger btn-sm" id="remove"
+								value="<%=i.getId()%>">
+								<i class="fa fa-trash-o"></i>
+							</button>
+						</td>
+					</tr>
+					<%
+						} //end for
+								} //end else
+					%>
+				</tbody>
+				<tfoot>
+					<tr class="visible-xs">
+						<td class="text-center"><strong>Total</strong></td>
+					</tr>
+					
+					<tr>
+						<td><a href="welcome.jsp" class="btn btn-warning"><i
+								class="fa fa-angle-left"></i> Continue Shopping</a></td>
+						<td colspan="2" class="hidden-xs"></td>
+						<td class="hidden-xs text-center"><strong>Total $<%=cart.totalPrice()%></strong></td>
+					
+						<!-- <td><button class="btn btn-success btn-block" type="submit" value="Submit">Checkout
+								<i class="fa fa-angle-right"></i></button> -->
+						<td><a href="checkOut.jsp" class="btn btn-success btn-block">Checkout
+							<i class="fa fa-angle-right"></i>		
+						</a></td>
+					</tr>
+				</tfoot>
+			</table>
+		<!-- </form> -->
 		<%
 			} //end if
 		%>
+		
 
-
+	
 	</div>
 	<%
 		}

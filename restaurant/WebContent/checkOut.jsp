@@ -20,7 +20,7 @@
 <br>
 <br>
 </body>
-<title>Edit Profile</title>
+<title>Checkout</title>
 </head>
 <body>
 	<%
@@ -75,20 +75,9 @@
 	<!-- /.container --> </nav>
 	<div class="container">
 		<div class="row">
-			<h1>Edit Profile</h1>
+			<h1>Checkout</h1>
 			<hr>
-			<!-- left column -->
-			<div class="col-md-3">
-				<div class="text-center">
-					<p>
-						<a href="#" class="btn btn-primary btn-block "> Edit profile</a>
-					</p>
-					<p>
-						<a href="orderHistory.jsp" class="btn btn-primary btn-block ">Order History</a>
-					</p>
-				</div>
-			</div>
-
+			
 			<!-- edit form column -->
 			<div class="col-md-9 personal-info">
 				<%
@@ -104,59 +93,32 @@
 					}
 						if (user != null) {
 				%>
-				<div class="alert alert-info alert-dismissable">
-					<a class="panel-close close" data-dismiss="alert">×</a> <i
-						class="fa fa-coffee"></i> <strong>.</strong>.You can edit your
-					profile....
-				</div>
+				
 				<h3>Personal info</h3>
 				<form class="form-horizontal" role="form" method="POST"
-					action="updateUserInfo">
+					action="addOrder.jsp"> 
 					<div class="form-group">
-						<label class="col-lg-3 control-label">First name:</label>
+						<label class="col-lg-3 control-label">Delivery Address</label>
 						<div class="col-lg-8">
-							<input class="form-control" name="fname" type="text"
-								value="<%=user.getFirstname()%>">
+							<input name="address" class="form-control" type="text" value="" required>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-lg-3 control-label">Last name:</label>
+						<label class="col-lg-3 control-label">Phone Number</label>
 						<div class="col-lg-8">
-							<input class="form-control" name="lname" type="text"
-								value="<%=user.getLastname()%>">
-						</div>
-					</div>
-					<!-- 
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Home Address</label>
-						<div class="col-lg-8">
-							<input class="form-control" type="text" value="">
+							<input name="phone" class="form-control" type="text" value="" required>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-lg-3 control-label">Company Address</label>
+						<label class="col-lg-3 control-label">Credit Card</label>
 						<div class="col-lg-8">
-							<input class="form-control" type="text" value="">
-						</div>
-					</div>
-					 -->
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Email:</label>
-						<div class="col-lg-8">
-							<input class="form-control" name="email" type="text"
-								value="<%=user.getEmail()%>">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Password:</label>
-						<div class="col-md-8">
-							<input class="form-control" name="pwd" type="password" value="">
+							<input name="creditCard" class="form-control" type="text" value="" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label"></label>
 						<div class="col-md-8">
-							<input class="btn btn-primary" type="submit" value="Save Changes">
+							<input class="btn btn-primary" type="submit" value="Place Order">
 							<span></span> <input class="btn btn-default" type="reset"
 								value="Cancel">
 						</div>

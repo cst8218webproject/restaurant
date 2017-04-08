@@ -17,7 +17,7 @@ public class LoginDao {
         String dbName = "webproject?useSSL=false";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
-        String password = "";
+        String password = "root";
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager

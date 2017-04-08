@@ -26,7 +26,7 @@ public class CheckAvailability extends HttpServlet {
             String connectionURL = "jdbc:mysql://localhost:3306/webproject?useSSL=false"; // students is my database name
             Connection connection = null;
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection(connectionURL, "root", "");
+            connection = DriverManager.getConnection(connectionURL, "root", "root");
             String uname = request.getParameter("uname");
             PreparedStatement ps = connection.prepareStatement("select * from Users where username=?");
             ps.setString(1,uname);
