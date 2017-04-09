@@ -19,28 +19,39 @@ public class LoginServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  
 			throws ServletException, IOException {  
 
-		response.setContentType("text/html");  
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();  
 
 		String n=request.getParameter("uname");  
 		String p=request.getParameter("pass"); 
 
-		HttpSession session = request.getSession(false);
-		if(session!=null){
-			session.setAttribute("username", n);
-		}
+		HttpSession session = request.getSession();
+		
 		int id = LoginDao.validate(n, p);
 		if(id > 0){
 			session.setAttribute("id", id);
-			RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");  
+			session.setAttribute("username", n);
+//			response.sendRedirect("welcome.jsp");
+			RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
 			rd.forward(request,response);  
 		}  
 		else{
 			request.setAttribute("errorMessage", "Please input correct account and password");
-			RequestDispatcher rd=request.getRequestDispatcher("signin.jsp");  
+			RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
 			rd.include(request,response);  
 		}  
 
 		out.close();
-	}  
+	}
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response)  
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if(null == session.getAttribute("username")){
+			doPost(request, response);
+		}else{
+			RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
+			rd.forward(request,response);
+		}
+	}
 } 

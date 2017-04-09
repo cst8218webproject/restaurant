@@ -1,12 +1,21 @@
-<%@ page import="project.web.common.MenuitemBean"%>
-<%@ page language="java" contentType="text/html; UTF-8"
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.cart.ejb.CartBean"%>
+<%@ page import="project.web.common.MenuitemBean"%>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en_CA'}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:bundle basename="Language/LanguageBundle">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
-<title>Cart</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title><fmt:message key="cart.Title" /></title>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,68 +28,24 @@
 <script src='Common/js/cart.js'></script>
 </head>
 <body>
+	<%@include file ="Common/navbar.jsp" %>
 	<%
-		String username;
 		CartBean cart;
-		if (null == session) {
-			response.sendRedirect("index.jsp");
-		} else if (null == session.getAttribute("username")) {
-			response.sendRedirect("index.jsp");
-		} else {
-			cart = (CartBean) session.getAttribute("Cart");
-			if (null == cart) {
-				cart = new CartBean();
-			}
+		cart = (CartBean) session.getAttribute("Cart");
+		if (null == cart) {
+			cart = new CartBean();
+		}
+
 	%>
-	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	
 	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Hello <%=session.getAttribute("username")%>,
-				welcome to ACZ Restaurant
-			</a>
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="welcome.jsp">Home</a></li>
-				<li><a href="#menu">Menu</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="success.jsp">Partner</a>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Profile <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="userprofile.jsp">Edit profile</a></li>
-						<li><a href="#">Orders</a></li>
-						<li><hr></li>
-						<li><a href="logout.jsp">Logout</a></li>
-					</ul></li>
-				<li role="presentation"><a href="Cart.jsp">Cart <span
-						class="badge"><%=cart.Count()%></span></a></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav>
-	<div class="container">
-		<%
-			if (null != cart) {
-		%>
 		<table id="cart" class="table table-hover table-condensed">
 			<thead>
 				<tr>
-					<th style="width: 50%">Product</th>
-					<th style="width: 10%">Price</th>
-					<th style="width: 8%">Quantity</th>
-					<th style="width: 22%" class="text-center">Subtotal</th>
+					<th style="width: 40%"><fmt:message key="cart.Product" /></th>
+					<th style="width: 12%"><fmt:message key="cart.Price" /></th>
+					<th style="width: 14%"><fmt:message key="cart.Quantity" /></th>
+					<th style="width: 22%" class="text-center"><fmt:message key="cart.Subtotal" /></th>
 					<th style="width: 10%"></th>
 				</tr>
 			</thead>
@@ -88,7 +53,7 @@
 				<%
 					if (cart.Count() == 0) {
 				%>
-				<td>No items in the cart.</td>
+				<td><fmt:message key="cart.EmptyCart" /></td>
 				<%
 					} else {
 								for (MenuitemBean i : cart.getContents()) {
@@ -124,28 +89,20 @@
 			</tbody>
 			<tfoot>
 				<tr class="visible-xs">
-					<td class="text-center"><strong>Total</strong></td>
+					<td class="text-center"><strong><fmt:message key="cart.Total" /></strong></td>
 				</tr>
 				<tr>
 					<td><a href="welcome.jsp" class="btn btn-warning"><i
-							class="fa fa-angle-left"></i> Continue Shopping</a></td>
+							class="fa fa-angle-left"></i> <fmt:message key="cart.ContinueShopping" /></a></td>
 					<td colspan="2" class="hidden-xs"></td>
-					<td class="hidden-xs text-center"><strong>Total $<%=cart.totalPrice()%></strong></td>
-					<td><a href="#" class="btn btn-success btn-block">Checkout
+					<td class="hidden-xs text-center"><strong><fmt:message key="cart.Total" /> $<%=cart.totalPrice()%></strong></td>
+					<td><a href="#" class="btn btn-success btn-block"><fmt:message key="cart.Checkout" />
 							<i class="fa fa-angle-right"></i>
 					</a></td>
 				</tr>
 			</tfoot>
 		</table>
-		<%
-			} //end if
-		%>
-
-
 	</div>
-	<%
-		}
-	%>
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
 
@@ -154,7 +111,4 @@
 </body>
 
 </html>
-
-
-
-
+</fmt:bundle>

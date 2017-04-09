@@ -27,28 +27,53 @@
 				pst.setInt(1, id);
 
 				ingredientRS = pst.executeQuery();
+%>
+<div class="col-md-4 text-center">
+	<div class="thumbnail">
+		<a href="<%=imgsrc%>" data-lightbox-gallery="zenda-gallery"><img
+			class="img-responsive" src="<%=imgsrc%>" alt=""></a>
+		<div class="caption">
+			<h3><%=name%></h3>
 
-				out.println("<div class=\"col-md-4 text-center\">\n<div class=\"thumbnail\">");
-				out.println("<a href=\"" + imgsrc
-						+ "\" data-lightbox-gallery=\"zenda-gallery\"><img class=\"img-responsive\" src=\""
-						+ imgsrc + "\" alt=\"\"></a>");
-				out.println("<div class=\"caption\">");
-				out.println("<h3>" + name + " </h3>");
+			<%
+				//out.println("<div class=\"col-md-4 text-center\">\n<div class=\"thumbnail\">");
+							//out.println("<a href=\"" + imgsrc
+							//		+ "\" data-lightbox-gallery=\"zenda-gallery\"><img class=\"img-responsive\" src=\""
+							//		+ imgsrc + "\" alt=\"\"></a>");
+							//out.println("<div class=\"caption\">");
+							//out.println("<h3>" + name + " </h3>");
 
-				StringBuilder sb = new StringBuilder();
-				if(ingredientRS.next())
-					sb.append(ingredientRS.getString(2));
-				while(ingredientRS.next()){
-					sb.append("/").append(ingredientRS.getString(2));
-				}
-				out.println("<p>" + sb.toString() + "</p>");
-				out.println("$" + price.toString());
-				out.println("<p>"+description + "</p>");
-				out.println("<div id=\"page-wrap\"><div>");// Add action to put good into cart
-				out.println("<div class=\"numbers-row\">");
-				out.println("<label for=\"name\">Quantity</label>");
-				out.println("<input type=\"text\" name=\"french-hens\" id=\"" + id + "\" value=\"0\">");
-				out.print("</div></div><button id=\"order\">Add</button></div></div></div></div>");
+							StringBuilder sb = new StringBuilder();
+							if (ingredientRS.next())
+								sb.append(ingredientRS.getString(2));
+							while (ingredientRS.next()) {
+								sb.append("/").append(ingredientRS.getString(2));
+							}
+			%>
+			<p><%=sb.toString()%></p>
+			$<%=price.toString()%><br>
+			<p><%=description%></p>
+			<div id="page-wrap">
+				<div>
+					<div class="numbers-row">
+						<label for="name"></label> <input type="text"
+							name="french-hens" id="<%=id%>" value="0">
+					</div>
+				</div>
+				<button id="order">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
+<%
+				//out.println("<p>" + sb.toString() + "</p>");
+				//out.println("$" + price.toString());
+				//out.println("<p>"+description + "</p>");
+				//out.println("<div id=\"page-wrap\"><div>");// Add action to put good into cart
+				//out.println("<div class=\"numbers-row\">");
+				//out.println("<label for=\"name\">Quantity</label>");
+				//out.println("<input type=\"text\" name=\"french-hens\" id=\"" + id + "\" value=\"0\">");
+				//out.print("</div></div><button id=\"order\">Add</button></div></div></div></div>");
 			} else {
 				break;
 			}
@@ -81,7 +106,7 @@
 				out.println(e);
 			}
 		}
-		if(ingredientRS != null){
+		if (ingredientRS != null) {
 			try {
 				ingredientRS.close();
 			} catch (SQLException e) {

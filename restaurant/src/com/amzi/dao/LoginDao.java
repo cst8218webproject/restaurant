@@ -1,28 +1,21 @@
 package com.amzi.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import project.db.DatabaseConnection;
 
 public class LoginDao {
+	private static Connection conn = null;
+	
     public static int validate(String name, String pass) {        
         int id = 0;
-        Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
-        String url = "jdbc:mysql://localhost:3306/";
-        String dbName = "webproject?useSSL=false";
-        String driver = "com.mysql.jdbc.Driver";
-        String userName = "root";
-        String password = "";
         try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager
-                    .getConnection(url + dbName, userName, password);
-
+            conn = new DatabaseConnection().getConnection();
             pst = conn
                     .prepareStatement("select * from Users where username=? and password=?");
             pst.setString(1, name);

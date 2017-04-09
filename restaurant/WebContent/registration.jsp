@@ -22,7 +22,8 @@
         	out.print("Error");
         }
     }catch(Exception e){
-    	response.sendRedirect("reg.jsp");
+    	//response.sendRedirect("reg.jsp");
+    	
     	out.print(e.toString());
     }
 %>
