@@ -39,10 +39,10 @@
 			<div class="col-md-3">
 				<div class="text-center">
 					<p>
-						<a href="#" class="btn btn-primary btn-block "> <fmt:message key="profile.EditProfile" /></a>
+						<a href="userprofile.jsp" class="btn btn-primary btn-block "> <fmt:message key="profile.EditProfile" /></a>
 					</p>
 					<p>
-						<a href="#" class="btn btn-primary btn-block "><fmt:message key="profile.OrderHistory" /></a>
+						<a href="orderHistory.jsp" class="btn btn-primary btn-block "><fmt:message key="profile.OrderHistory" /></a>
 					</p>
 				</div>
 			</div>

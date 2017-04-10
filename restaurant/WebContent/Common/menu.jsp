@@ -3,18 +3,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.sql.*"%>
 <%@ page import="java.math.BigDecimal"%>
+<%@ page import="project.db.DatabaseConnection"%>
 <%
-	Connection conn = null;
+	Connection conn = new DatabaseConnection().getConnection();
 	PreparedStatement pst = null;
 	ResultSet menuRS = null;
 	ResultSet ingredientRS = null;
+	int roleId=(int)session.getAttribute("roleId");
+	ResultSet userRS = null;
 	try {
-		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webproject?useSSL=false", "root", "");
+		//Class.forName("com.mysql.jdbc.Driver");
+		//conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webproject?useSSL=false", "root", "");
 		pst = conn.prepareStatement("select * from menuitems");
 		menuRS = pst.executeQuery();
-
-		for (int i = 0; i < 6; i++) {
+		
+		for (int i = 0; i < 10; i++) {
 			if (menuRS.next()) {
 				String imgsrc = menuRS.getString(5);
 				String description = menuRS.getString(4);
@@ -60,7 +63,12 @@
 							name="french-hens" id="<%=id%>" value="0">
 					</div>
 				</div>
-				<button id="order">Add</button>
+				<%if(roleId!=1){ %>
+					<button id="order">Add</button>
+				<%} else{%>  
+					<button id="delete">Delete</button>
+				<%} %>
+				<!--<button id="order">Add</button>-->
 			</div>
 		</div>
 	</div>

@@ -66,12 +66,17 @@
 		<div class="row" id="menu">
 			<div class="col-lg-12">
 				<h2 class="page-header"><fmt:message key="welcome.Menu" /></h2>
+				<%
+				int roleId = (int)session.getAttribute("roleId");
+				if(roleId==1){%>
+				<a href ="smart_02.html" id="addfood">Add New Food</a>
+				<%}%>
 			</div>
 			<!-- TODO Modify to load 6 menu items from database -->
 			<jsp:include page="Common/menu.jsp" />
 			
 		</div>
-			<!-- /.row -->
+			<!-- /.row 
 			<section id="menu" class="parallax-section">
 				<div class="container">
 					<div class="row">

@@ -96,7 +96,7 @@
 							class="fa fa-angle-left"></i> <fmt:message key="cart.ContinueShopping" /></a></td>
 					<td colspan="2" class="hidden-xs"></td>
 					<td class="hidden-xs text-center"><strong><fmt:message key="cart.Total" /> $<%=cart.totalPrice()%></strong></td>
-					<td><a href="#" class="btn btn-success btn-block"><fmt:message key="cart.Checkout" />
+					<td><a href="checkOut.jsp" class="btn btn-success btn-block"><fmt:message key="cart.Checkout" />
 							<i class="fa fa-angle-right"></i>
 					</a></td>
 				</tr>

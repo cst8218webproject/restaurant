@@ -51,7 +51,7 @@
 						data-toggle="dropdown"><fmt:message key="nav.Profile" /><b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="userprofile.jsp"><fmt:message key="nav.EditProfile" /></a></li>
-							<li><a href="#"><fmt:message key="nav.Orders" /></a></li>
+							<li><a href="orderHistory.jsp"><fmt:message key="nav.Orders" /></a></li>
 							<li><hr></li>
 							<li><a href="logout.jsp"><fmt:message key="nav.Logout" /></a></li>
 						</ul>

@@ -2,6 +2,19 @@
  * 
  */
 $(document).ready(function() {
+	$("button#delete").click(function() {
+
+		var id = $(this).parent().find("input").attr("id");
+
+		$.ajax({
+			type : "POST",
+			url : "deleteMenuItem",
+			data : {id:id},
+			success : function() {
+				window.location.href = "welcome.jsp";
+			}
+		});
+	});
 	$("button#order").click(function() {
 		var quantity = $(this).parent().find("input").val();
 		var id = $(this).parent().find("input").attr("id");
@@ -37,4 +50,7 @@ $(function() {
 		}
 		$button.parent().find("input").val(newVal);
 	});
+});
+$(document).ready(function() {
+
 });

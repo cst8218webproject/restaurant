@@ -53,4 +53,47 @@ public class LoginDao {
         }
         return id;
     }
+    public static int validateRole(int id) {        
+        int roleId = 0;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            conn = new DatabaseConnection().getConnection();
+            pst = conn
+                    .prepareStatement("select * from Users where id=?");
+            pst.setInt(1, id);
+
+            rs = pst.executeQuery();
+            if(rs.next()){
+            	roleId = rs.getInt(10);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return roleId;
+    }
 }

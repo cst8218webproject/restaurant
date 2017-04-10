@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
-@WebFilter("/*")
+@WebFilter("*.jsp")
 public class AuthenticationFilter implements Filter {
 
     /**
@@ -38,10 +38,10 @@ public class AuthenticationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
 		String uri = req.getRequestURI();
 
-		if(session.getAttribute("username") == null && !(uri.endsWith("index.jsp")|| uri.endsWith("signin.jsp") || uri.endsWith("reg.jsp")||uri.endsWith("login"))){
+		if(session.getAttribute("username") == null && !(uri.endsWith("index.jsp")|| uri.endsWith("signin.jsp")|| uri.endsWith("registration.jsp") || uri.endsWith("reg.jsp"))){
 			res.sendRedirect("index.jsp");
 		}else{
 			chain.doFilter(request, response);
