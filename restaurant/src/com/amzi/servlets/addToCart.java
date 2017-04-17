@@ -19,6 +19,10 @@ import project.web.common.MenuitemBean;
 
 /**
  * Servlet implementation class addToCart
+ * @author Chen Deng
+ * @see CartBean
+ * This Servlet create a Cartbean object if no one exists,
+ * and then add a menuitem object to it or update the quantity.
  */
 @WebServlet("/addToCart")
 public class addToCart extends HttpServlet {

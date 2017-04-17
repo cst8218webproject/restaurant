@@ -1,3 +1,4 @@
+<%@page import="java.util.Enumeration"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -49,7 +50,6 @@
 								key="btn.LearnMore" /></a>
 					</p>
 				</div>
-
 				<div class="mastfoot">
 					<div class="inner">
 						<p>LOCATION 1385 Woodroffe Ave, Nepean, ON K2G 1V8 HOURS

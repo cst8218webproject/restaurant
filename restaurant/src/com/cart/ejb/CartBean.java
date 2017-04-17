@@ -16,7 +16,11 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
-
+/**
+ * Description: This class represents a cart and stores information.
+ * @author Chen
+ *
+ */
 @Stateful
 public class CartBean implements Cart{
 

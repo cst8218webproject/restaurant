@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html" pageEncoding="utf-8"%>
 <%@ page import ="java.sql.*" %>
 <%@ page import="com.jspsmart.upload.*" %> 
-    
+<%--
+@author Zhenwei
+ --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,11 +23,10 @@
   String des=smart.getRequest().getParameter("description");
   String pri=smart.getRequest().getParameter("price");
  com.jspsmart.upload.File file = smart.getFiles().getFile(0);
- String test = file.getFileName();
-String fileName="images"+"\\"+"Menuitems"+"\\"+file.getFileName();
+String fileName="images"+"/"+"Menuitems"+"/"+file.getFileName();
 
 
- smart.save("/images/Menuitems");  //文件保存  
+ smart.save("E:/Projects/Git/RestaurantWeb/restaurant/WebContent/images/Menuitems");  //文件保存  
  Class.forName("com.mysql.jdbc.Driver");
  Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/webproject?useSSL=false","root", "");
  Statement st = con.createStatement();
@@ -34,7 +35,7 @@ String fileName="images"+"\\"+"Menuitems"+"\\"+file.getFileName();
  	int i = st.executeUpdate("insert into menuitems(name, description,price,imgsrc) values ('"+name+"' , '"+des+"' , '"+pri+"' , '"+fileName+"')");
  	if (i > 0) {
         
-         response.sendRedirect("login.jsp");
+         response.sendRedirect("welcome.jsp");
      } else {
      	out.print("Error");
      }

@@ -15,6 +15,8 @@ import project.db.DatabaseConnection;
 
 /**
  * Servlet implementation class deleteMenuItem
+ * @author Adrien
+ * Description: Remove menuitem from database
  */
 @WebServlet("/deleteMenuItem")
 public class deleteMenuItem extends HttpServlet {

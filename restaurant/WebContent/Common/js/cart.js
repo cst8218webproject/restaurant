@@ -1,5 +1,6 @@
 /**
- * 
+ * Send request to remove an item from cart and refresh page
+ * @author Chen
  */
 $(document).ready(function() {
 	$("button#remove").click(function() {

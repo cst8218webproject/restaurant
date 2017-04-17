@@ -5,7 +5,9 @@
 <%@ page import="com.cart.ejb.CartBean"%>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="project.db.DatabaseConnection"%>
-
+<%--
+@author Adrien
+ --%>
 <%
 	CartBean cart;
 	BigDecimal cartPrice = new BigDecimal(0);

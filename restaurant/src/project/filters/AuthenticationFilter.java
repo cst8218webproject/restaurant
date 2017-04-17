@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class AuthenticationFilter
+ * Description: This filter checks whether user is logged in for all .jsp 
+ * requests.
+ * @author Chen
  */
 @WebFilter("*.jsp")
 public class AuthenticationFilter implements Filter {

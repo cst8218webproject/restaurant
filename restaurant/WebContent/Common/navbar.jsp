@@ -4,7 +4,11 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ResourceBundle"%>
 <%@ page import="com.cart.ejb.CartBean"%>
-
+<%--
+This page represent the navbar which will be included in every page at the top.
+Appearance and button will be different based on session(user logged in or not)
+@author Chen, Zhenwei
+ --%>
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en_CA'}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:bundle basename="Language/LanguageBundle">

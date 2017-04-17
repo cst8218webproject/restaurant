@@ -17,6 +17,9 @@ import com.cart.util.ItemException;
 import project.web.common.MenuitemBean;
 /**
  * Servlet implementation class ViewCart
+ * @author Chen
+ * Description: This class get Cartbean object from session and generate
+ * html code to display all menuitems.
  */
 @WebServlet("/ViewCart")
 public class ViewCart extends HttpServlet {
@@ -27,7 +30,6 @@ public class ViewCart extends HttpServlet {
      */
     public ViewCart() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

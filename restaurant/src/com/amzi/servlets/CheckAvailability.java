@@ -5,6 +5,12 @@ import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import project.db.DatabaseConnection;
+/**
+ * This class check if username already exists in the database
+ * @author Chen Deng
+ *
+ */
 public class CheckAvailability extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,15 +29,11 @@ public class CheckAvailability extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String connectionURL = "jdbc:mysql://localhost:3306/webproject?useSSL=false"; // students is my database name
-            Connection connection = null;
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection(connectionURL, "root", "");
+            Connection connection = new DatabaseConnection().getConnection();
             String uname = request.getParameter("uname");
             PreparedStatement ps = connection.prepareStatement("select * from Users where username=?");
             ps.setString(1,uname);
             ResultSet rs = ps.executeQuery();
-            // TODO does output to reg.jsp
             if (!rs.next()) {
                 out.println("<font color=green>"+uname+" is avaliable</font>");
             }

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class LocaleFilter
+ * Description: This filter checks locale/language setting
+ * @author Chen
  */
 @WebFilter(description = "Check locale", urlPatterns = { "/*" })
 public class LocaleFilter implements Filter {

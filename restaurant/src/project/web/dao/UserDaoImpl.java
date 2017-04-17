@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 
 import project.db.DatabaseConnection;
 import project.web.common.UserBean;
-
+/**
+ * This class connect to database and operate on users table.
+ * @author Chen
+ *
+ */
 public class UserDaoImpl implements UserDao{
 	private Connection conn = null;
 	private PreparedStatement pStmt = null;

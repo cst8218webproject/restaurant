@@ -1,5 +1,6 @@
 /**
- * 
+ * Based on the button clicked, add/remove item from cart
+ * @author Chen
  */
 $(document).ready(function() {
 	$("button#delete").click(function() {
@@ -31,6 +32,9 @@ $(document).ready(function() {
 		});
 	});
 });
+/**
+ * @author Zhenwei Chen
+ */
 $(function() {
 	$(".numbers-row")
 	.append(

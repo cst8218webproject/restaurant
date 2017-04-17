@@ -12,6 +12,9 @@ import project.web.dao.UserFactory;
 
 /**
  * Servlet implementation class updateUserInfo
+ * @author Chen Deng
+ * Description: this class get the information from form and update
+ * record of user in database according to id
  */
 @WebServlet("/updateUserInfo")
 public class updateUserInfo extends HttpServlet {

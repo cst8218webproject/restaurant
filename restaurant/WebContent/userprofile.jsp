@@ -5,6 +5,9 @@
 <%@ page import="com.cart.ejb.CartBean"%>
 <%@ page import="project.web.common.UserBean"%>
 <%@ page import="project.web.dao.UserFactory"%>
+<%--
+@author Chen, Zhenwei
+ --%>
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en_CA'}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:bundle basename="Language/LanguageBundle">

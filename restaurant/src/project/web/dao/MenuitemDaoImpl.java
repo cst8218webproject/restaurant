@@ -8,7 +8,11 @@ import java.util.List;
 
 import project.db.DatabaseConnection;
 import project.web.common.MenuitemBean;
-
+/**
+ * Connect to database and operate on menuitems table in database
+ * @author Chen
+ *
+ */
 public class MenuitemDaoImpl implements MenuitemDao{
 
 	private Connection conn = null;

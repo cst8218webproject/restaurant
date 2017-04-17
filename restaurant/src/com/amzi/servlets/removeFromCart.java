@@ -14,6 +14,9 @@ import com.cart.ejb.Cart;
 
 /**
  * Servlet implementation class removeFromCart
+ * @author Chen Deng
+ * Description: this class remove a menuitem from Cartbean object which 
+ * stored in session.
  */
 @WebServlet("/removeFromCart")
 public class removeFromCart extends HttpServlet {

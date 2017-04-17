@@ -4,6 +4,10 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.cart.ejb.CartBean"%>
 <%@ page import="project.web.common.MenuitemBean"%>
+<%--
+@author Chen
+This page display all items in cart
+ --%>
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en_CA'}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:bundle basename="Language/LanguageBundle">

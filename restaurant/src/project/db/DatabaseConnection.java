@@ -2,7 +2,12 @@ package project.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-
+/**
+ * Description: This class contains database connection information
+ * and provide connection to database.
+ * @author Chen
+ *
+ */
 public class DatabaseConnection {
 	private Connection conn = null;
 	private static final String driver = "com.mysql.jdbc.Driver";

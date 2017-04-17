@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.amzi.dao.LoginDao;
-
+/**
+ * Description: Get username and password from request and validate
+ * if success set attribute in session else output error message.
+ *
+ */
 public class LoginServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;

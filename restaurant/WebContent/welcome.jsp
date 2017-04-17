@@ -3,6 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.cart.ejb.CartBean"%>
+<%--
+@author Zhenwei, Chen
+ --%>
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en_CA'}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:bundle basename="Language/LanguageBundle">
@@ -21,7 +24,8 @@
 
 <!-- Custom CSS -->
 <link href="Common/css/modern-business.css" rel="stylesheet">
-
+<link rel="stylesheet" href="css/nivo-lightbox.css">
+<link rel="stylesheet" href="css/nivo_themes/default/default.css">
 <!-- Custom Fonts -->
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>

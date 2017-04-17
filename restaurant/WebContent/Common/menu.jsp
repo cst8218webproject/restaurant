@@ -5,26 +5,36 @@
 <%@ page import="java.math.BigDecimal"%>
 <%@ page import="project.db.DatabaseConnection"%>
 <%
+/**
+* Connection to database and display all menuitem.
+* @author Chen, Zhenwei
+*
+*/
 	Connection conn = new DatabaseConnection().getConnection();
 	PreparedStatement pst = null;
 	ResultSet menuRS = null;
 	ResultSet ingredientRS = null;
 	int roleId=(int)session.getAttribute("roleId");
 	ResultSet userRS = null;
+	String language = (String)session.getAttribute("language");
 	try {
-		//Class.forName("com.mysql.jdbc.Driver");
-		//conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webproject?useSSL=false", "root", "");
 		pst = conn.prepareStatement("select * from menuitems");
 		menuRS = pst.executeQuery();
 		
-		for (int i = 0; i < 10; i++) {
-			if (menuRS.next()) {
+			while (menuRS.next()) {
+				String name = null;
+				String description = null;
 				String imgsrc = menuRS.getString(5);
-				String description = menuRS.getString(4);
+				if(language!=null && !language.equals("zh_CN")){// Get name and description based on language
+					name = menuRS.getString(2);
+					description = menuRS.getString(4);
+				}else{
+					name = menuRS.getString(6);
+					description = menuRS.getString(7);
+				}
 				BigDecimal price = menuRS.getBigDecimal(3);
-				String name = menuRS.getString(2);
 				int id = menuRS.getInt(1);
-
+				
 				pst = conn.prepareStatement(
 						"select * from ingredients where id in (select ingredient_id from menuitem_ingredient where menuitem_id = ?)");
 				pst.setInt(1, id);
@@ -59,6 +69,7 @@
 			<div id="page-wrap">
 				<div>
 					<div class="numbers-row">
+					
 						<label for="name"></label> <input type="text"
 							name="french-hens" id="<%=id%>" value="0">
 					</div>
@@ -82,10 +93,7 @@
 				//out.println("<label for=\"name\">Quantity</label>");
 				//out.println("<input type=\"text\" name=\"french-hens\" id=\"" + id + "\" value=\"0\">");
 				//out.print("</div></div><button id=\"order\">Add</button></div></div></div></div>");
-			} else {
-				break;
 			}
-		}
 	} catch (Exception e) {
 		System.out.println(e);
 		e.printStackTrace();

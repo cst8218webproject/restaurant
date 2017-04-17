@@ -3,12 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ResourceBundle"%>
-
-<c:set var="loc" value="en_CA" />
-<c:if test="${!(empty param.locale)}">
-	<c:set var="loc" value="${param.locale}"></c:set>
-</c:if>
-<fmt:setLocale value="${loc}" />
+<%--
+@author Adrien, Chen
+ --%>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en_CA'}" scope="session" />
+<fmt:setLocale value="${language}" />
 <fmt:bundle basename="Language/LanguageBundle">
 
 <!DOCTYPE html>

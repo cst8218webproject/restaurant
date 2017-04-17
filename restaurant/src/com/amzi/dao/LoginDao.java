@@ -5,10 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import project.db.DatabaseConnection;
-
+/**
+ * 
+ * @author Chen Deng
+ * This class is used to connect database and get user info
+ * when login.
+ */
 public class LoginDao {
 	private static Connection conn = null;
-	
+	/**
+	 * This method first get connection to database and use
+	 * parameters to validate if user exist.
+	 * @param name username of user
+	 * @param pass password
+	 * @return user id
+	 */
     public static int validate(String name, String pass) {        
         int id = 0;
         PreparedStatement pst = null;
@@ -53,11 +64,16 @@ public class LoginDao {
         }
         return id;
     }
+    /**
+     * This method get the role id of user from database
+     * @author Chen Deng
+     * @param id id of user
+     * @return role id
+     */
     public static int validateRole(int id) {        
         int roleId = 0;
         PreparedStatement pst = null;
         ResultSet rs = null;
-
         try {
             conn = new DatabaseConnection().getConnection();
             pst = conn
@@ -68,7 +84,6 @@ public class LoginDao {
             if(rs.next()){
             	roleId = rs.getInt(10);
             }
-
         } catch (Exception e) {
             System.out.println(e);
         } finally {

@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.*;
-
+/**
+ * Description: This class represents a menuitem
+ * @author Chen
+ *
+ */
 @Entity
 @Table(name="menuitems", catalog = "webproject")
 public class MenuitemBean implements Serializable{

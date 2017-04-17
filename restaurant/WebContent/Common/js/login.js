@@ -1,3 +1,7 @@
+/**
+ * This function get username and password and then doPost to
+ * login.
+ */
 $(document).ready(function() {
 	$("button#btnLogin").click(function() {
 		var uname = $(this).parent().find("input#usr").val();

@@ -8,7 +8,11 @@ import com.cart.util.ItemException;
 import project.web.common.MenuitemBean;
 
 import javax.ejb.Local;;
-
+/**
+ * 
+ * @author Chen
+ * Interface for Cart operations.
+ */
 @Local
 public interface Cart {
 	public void initialize(String person) throws ItemException;

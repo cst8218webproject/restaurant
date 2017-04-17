@@ -1,3 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ResourceBundle"%>
+<%--
+@author Zhenwei, Chen
+ --%>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en_CA'}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:bundle basename="Language/LanguageBundle">
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +20,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>Sign in Template for Bootstrap</title>
+<title><fmt:message key="reg.Title" /></title>
 
 <!-- Bootstrap core CSS -->
 <link href="bootstrap.min.css" rel="stylesheet">
@@ -57,24 +68,24 @@
 	<div class="container">
 
 		<form method="post" action="registration.jsp" class="form-signin">
-			<h2 class="form-signin-heading">Register Your Account</h2>
-			<label for="inputName" class="sr-only">First Name</label> <input
+			<h2 class="form-signin-heading"><fmt:message key="reg.Header" /></h2>
+			<label for="inputName" class="sr-only"><fmt:message key="user.FirstName" /></label> <input
 				type="text" name="fname" value="" class="form-control"
-				placeholder="First Name" required autofocus> <label
-				for="inputEmail" class="sr-only">Last Name</label> <input
+				placeholder="<fmt:message key="user.FirstName" />" required autofocus> <label
+				for="inputEmail" class="sr-only"><fmt:message key="user.LastName" /></label> <input
 				type="text" name="lname" value="" class="form-control"
-				placeholder="Last Name" required> <label for="inputPassword"
-				class="sr-only">Email</label> <input type="email" name="email"
-				value="" class="form-control" placeholder="Email" required>
-			<label for="inputaddress" class="sr-only">User Name</label> <input
+				placeholder="<fmt:message key="user.LastName" />" required> <label for="inputPassword"
+				class="sr-only"><fmt:message key="user.Email" /></label> <input type="email" name="email"
+				value="" class="form-control" placeholder="<fmt:message key="user.Email" />" required>
+			<label for="inputaddress" class="sr-only"><fmt:message key="user.Username" /></label> <input
 				type="text" name="uname" value="" class="form-control"
-				placeholder="User Name" required><span class="status"></span>
-			<label for="inputtel" class="sr-only">Password</label> <input
+				placeholder="<fmt:message key="user.Username" />" required><span class="status"></span>
+			<label for="inputtel" class="sr-only"><fmt:message key="user.Password" /></label> <input
 				type="password" name="pass" value="" class="form-control"
-				placeholder="Password" required>
+				placeholder="<fmt:message key="user.Password" />" required>
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
-				value="Submit">Register</button>
+				value="Submit"><fmt:message key="reg.Title" /></button>
 		</form>
 	</div>
 	<!-- /container -->
@@ -84,3 +95,4 @@
 	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
+</fmt:bundle>
